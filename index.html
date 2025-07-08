@@ -59,13 +59,21 @@
       document.getElementById('feedback').innerText = '';
     }
     
-    function checkAnswer(correct) {
-      const userAnswer = document.getElementById('answer').value.trim();
-      const fb = (userAnswer === correct)
-        ? "✅ Bonne réponse !"
-        : `❌ Mauvaise réponse. La bonne réponse est : ${correct}`;
-      document.getElementById('feedback').innerText = fb;
-    }
+function checkAnswer(correct) {
+  const userAnswer = document.getElementById('answer').value;
+
+  // Normalisation : supprime les espaces et passe en minuscules
+  const nettoyee = txt => txt.toLowerCase().replace(/\s+/g, '').trim();
+
+  const isCorrect = nettoyee(userAnswer) === nettoyee(correct);
+
+  const fb = isCorrect
+    ? "✅ Bonne réponse !"
+    : `❌ Mauvaise réponse. La bonne réponse est : ${correct}`;
+
+  document.getElementById('feedback').innerText = fb;
+}
+
   </script>
 </body>
 </html>
